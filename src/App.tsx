@@ -10,7 +10,7 @@ function App() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [id, setId] = useState(0);
   async function getQuotes() {
-    const res = await fetch('/src/data/quotes.json');
+    const res = await fetch('https://dummyjson.com/quotes?limit=100');
     const data = await res.json();
     setQuotes(data.quotes);
   }
