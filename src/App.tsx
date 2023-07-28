@@ -8,14 +8,17 @@ type Quote = {
 
 function App() {
   const [quotes, setQuotes] = useState<Quote[]>([]);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(Math.floor(100 * Math.random()));
+
   async function getQuotes() {
     const res = await fetch('https://dummyjson.com/quotes?limit=100');
     const data = await res.json();
     setQuotes(data.quotes);
   }
   function getRandomId() {
-    setId(Math.floor(quotes.length * Math.random()));
+    const randNum = Math.floor(quotes.length * Math.random());
+    if (randNum === id) return getRandomId();
+    setId(randNum);
   }
 
   function tweetThis() {
